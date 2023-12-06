@@ -1,9 +1,11 @@
 package com.project.staragile.insureme;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +41,16 @@ public class PolicyController {
 	public Policy getPolicyDetails(@PathVariable(value="policyId") int policyId) {
 		return policyService.getPolicyDetails(policyId);
 	}
+	
+	@PutMapping("/updatePolicy/{policyId}")
+    public Policy updatePolicy(@PathVariable int policyId, @RequestBody Policy updatedPolicy) {
+        return policyService.updatePolicy(policyId,updatedPolicy);
+    }
+	
+	@DeleteMapping("/deletePolicy/{policyId}")
+    public String deletePolicy(@PathVariable int policyId) {
+        return policyService.deleteById(policyId);
+    }
 	
 }
 

@@ -1,5 +1,7 @@
 package com.project.staragile.insureme;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +51,24 @@ public class PolicyService {
 		// TODO Auto-generated method stub
 		return policyRepository.findById(policyId).get();
 	}
+
+	public Policy updatePolicy(int policyId, Policy updatedPolicy) {
+		Policy policy = getPolicyDetails(policyId);
+		 if (Objects.nonNull(policy) ) {
+			 policy.setPolicyHolderName(updatedPolicy.getPolicyHolderName());
+			 policyRepository.save(policy);
+			 return policy;
+		 }
+		return null;
+	}
+	
+	public String deleteById(int policyId) {
+		  Policy policy = getPolicyDetails(policyId);
+		  if (Objects.nonNull(policy) ) {
+			  policyRepository.delete(policy);
+			  return "Successfully Deleted";
+		  }
+			return "Deletion Failed";
+		}
 
 }
